@@ -17,10 +17,10 @@ do
         pkg_name="$pkg_name$RANDOM.apk"
     fi
     echo $pkg_name
-    curl -sL -o $pkg_name $url
+    curl -sL -o "$pkg_name" "$url"
 done < apk_urls.txt
 
 # Compress Output
-mkdir pakages && *.apk pakages/
+mkdir -p pakages && mv *.apk pakages/
 tar -czvf pakages.tar.gz pakages
 mkdir release && mv pakages.tar.gz "release/pakages.tar.gz"
