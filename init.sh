@@ -13,7 +13,7 @@ while read url ;
 do  
     pkg_name=$(basename $(echo $url) | xargs)
     if ! [[ $pkg_name == *.apk ]] ; then
-        pkg_name="$pkg_name$RANDOM.apk"
+        pkg_name="$RANDOM.apk"
     fi
     echo $pkg_name
     curl -sL -o "$pkg_name" "$url"
