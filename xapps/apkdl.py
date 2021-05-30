@@ -54,8 +54,7 @@ class PlayStoreDL(object):
 
     async def playstore(self, package_name: str) -> Optional[str]:
         error_count = 0
-        dl_link = None
-        while not dl_link:
+        while True:
             if error_count >= self.max_tries:
                 break
             try:
