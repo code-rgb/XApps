@@ -1,6 +1,6 @@
 name: Release
 
-on: ["workflow_dispatch", "push"]
+on: workflow_dispatch
 
 jobs:
   run_and_release:
@@ -12,8 +12,8 @@ jobs:
         with:
           python-version: 3.9
       - name: Run Script
-        run: chmod u+x init.sh && ./init.sh
-      - name: upload error
+        run: chmod +x init.sh && ./init.sh
+      - name: Check errors
         run: |
           if  [[ -f "error.png" ]]; then
               curl --upload-file "error.png" "https://transfer.sh/error.png"
@@ -21,7 +21,7 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: "v0.0.4"
+          tag_name: "v0.0.5"
           name: Release ${{ github.ref }}
           draft: false
           files: ./release/*.tar.gz
