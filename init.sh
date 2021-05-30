@@ -18,6 +18,7 @@ do
 done < apk_urls.txt
 
 # Compress Output
-mkdir pakages && mv xapps/*.apk pakages/
+ls *.apk
+mkdir pakages && *.apk pakages/
 tar -czvf pakages.tar.gz pakages
 mkdir release && mv pakages.tar.gz "release/pakages.tar.gz"
