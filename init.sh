@@ -24,6 +24,6 @@ mkdir -p pakages && mv *.apk pakages/
 tar -czvf pakages.tar.gz pakages
 mkdir release && mv pakages.tar.gz "release/pakages.tar.gz"
 
-if [[ -f "error.png"]] ; then
-    curl --upload-file ./error.png https://transfer.sh/error.png
+if [[ -f error.png]]; then
+    curl --upload-file error.png https://transfer.sh/error.png
 fi
