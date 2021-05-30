@@ -10,13 +10,19 @@ pip install --use-feature=in-tree-build .
 python -m xapps
 
 # Download apps from URLS
-while read url ;
+while ((i++)); read url
 do  
+    # Strip whitespaces
     pkg_name=$(basename $(echo $url) | xargs)
-    if ! [[ $pkg_name == *.apk ]] ; then
-        pkg_name="$RANDOM.apk"
+    # slice pakage name if it's longer than 25 char.
+    if [[ "${#pkg_name}" -gt "25" ]] ; then
+        pkg_name="${pkg_name:(-25)}"
     fi
-    echo $pkg_name
+    # check if it ends with ".apk"
+    if ! [[ $pkg_name == *.apk ]] ; then
+        pkg_name="$pkg_name$RANDOM.apk"
+    fi
+    echo "   $i) $pkg_name"
     curl -sL -o "$pkg_name" "$url"
 done < apk_urls.txt
 

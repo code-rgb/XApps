@@ -41,4 +41,3 @@ async def main():
     finally:
         await session.close()
         await apk_dl.stop()
-
