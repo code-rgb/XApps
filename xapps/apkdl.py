@@ -54,15 +54,14 @@ class PlayStoreDL(object):
 
     async def playstore(self, package_name: str) -> Optional[str]:
         error_count = 0
-        while True:
+        dl_link = None
+        while not dl_link:
             if error_count >= self.max_tries:
                 break
             try:
                 dl_link = await self._playstore_fetch(package_name)
             except pyppeteer.errors.PageError:
                 error_count += 1
-            else:
-                break
         return dl_link
 
     async def start(self) -> None:
