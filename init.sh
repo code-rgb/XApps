@@ -14,7 +14,7 @@ do
     if [[ pkg_name != *.apk ]] ; then
         pkg_name="$pkg_name.apk"
     fi
-    curl -sL $url > $pkg_name
+    curl -sL -o $pkg_name $url
 done < apk_urls.txt
 
 # Compress Output
