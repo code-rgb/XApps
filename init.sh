@@ -1,4 +1,5 @@
 #!/bin/bash
+# Fast fail
 set -euo pipefail
 
 # Install Requirements
