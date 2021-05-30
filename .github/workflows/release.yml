@@ -1,6 +1,6 @@
 name: Release
 
-on: workflow_dispatch
+on: ["workflow_dispatch", "push"]
 
 jobs:
   run_and_release:
