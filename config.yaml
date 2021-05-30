@@ -1,0 +1,72 @@
+# - app: Application name (Optional)
+#   description: Application description (Optional)
+#   source: (github | json | direct | fdroid | playstore)
+#     or wildcard like (mix | vlc)
+#   args: (if required)
+#   package: Pakage name, can be found by app's playstore link (if required)
+#   link: URL e.g direct download link (if required)
+
+- app: NekoX
+  description:
+    a free and open source third-party Telegram client, based on Telegram-FOSS
+    with features added.
+  source: github
+  args:
+    - NekoX-Dev/NekoX
+    - NekoX-mini-arm64-v8a-releaseNoGcm.apk
+
+- app: Instander
+  description: Instagram Mod
+  source: json
+  link: https://raw.githubusercontent.com/the-dise/the-dise.github.io/master/instander/ota.json
+  args:
+    - link
+
+- app: Spotify
+  description: Adfree Spotify Mod
+  source: direct
+  link: http://transfer.sh/get/9rcvP/Spotify-v8.6.26.897Mod-Amoled-arm64-v8a.apk
+
+- app: Infinity for Reddit
+  description: A beautiful, feature-rich Reddit client.
+  package: ml.docilealligator.infinityforreddit
+  source: fdroid
+
+- app: Aurora Droid
+  description: An alternative to the default F-Droid app
+  package: com.aurora.adroid
+  source: fdroid
+
+- app: Aurora Store
+  description: A Google Playstore Client
+  package: com.aurora.store
+  source: fdroid
+
+- app: AdAway
+  description: A free and Open Source ad blocker for Android.
+  package: org.adaway
+  source: fdroid
+
+- app: Vanced Manager
+  description: Install Youtube Vanced, Vanced Music and Micro G
+  source: github
+  args:
+    - YTVanced/VancedManager
+    - manager.apk
+
+- app: MiXplorer
+  description:
+    a fast, smooth, beautiful, reliable and full-featured Android file
+    manager
+  source: mix
+  link: https://forum.xda-developers.com/showpost.php?p=23109280&postcount=2
+
+- app: Whatsapp
+  description: Spyware, get Zucked :p
+  package: com.whatsapp
+  source: playstore
+
+- app: VLC
+  description: The best video and music player. Fast and "just works", plays any file
+  source: vlc
+  link: https://www.videolan.org/vlc/download-android.html
