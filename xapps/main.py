@@ -11,7 +11,9 @@ async def write_links(apk_dl: ApkDL) -> None:
     async def get_downloadlink(x: Dict[str, str]) -> Optional[str]:
         source = x["source"]
         if source == "github":
-            return await apk_dl.github(*x["args"])
+            m = await apk_dl.github(*x["args"])
+            print(m)
+            return m
         if source == "fdroid":
             return await apk_dl.fdroid(x["package"])
         if source == "json":
