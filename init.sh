@@ -7,7 +7,7 @@ pip install -U pip wheel setuptools
 pip install --use-feature=in-tree-build .
 
 # Run Python Script
-python xapps/main.py
+python -m xapps
 
 # Download apps from URLS
 while read url ;
