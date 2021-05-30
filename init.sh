@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Install Requirements
 pip install -U pip wheel setuptools
@@ -6,7 +7,6 @@ pip install --use-feature=in-tree-build .
 
 # Run Python Script
 python xapps/main.py
-
 
 # Download apps from URLS
 while read url ;
