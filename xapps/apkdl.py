@@ -115,7 +115,7 @@ class MiscDL(object):
             return f"{link.rsplit('/', 1)[0]}{match.group(0)}"
 
     async def vlc(self, link: str) -> Optional[str]:
-        async with session.get(link) as resp:
+        async with self._session.get(link) as resp:
             if resp.status != 200:
                 return
             page = await resp.text()
