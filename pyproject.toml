@@ -11,6 +11,7 @@ beautifulsoup4 = "^4.9.3"
 pyppeteer = "^0.2.5"
 fake-useragent = "^0.1.11"
 PyYAML = "^5.4.1"
+lxml = "^4.6.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
