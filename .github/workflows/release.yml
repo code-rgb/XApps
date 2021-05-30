@@ -16,8 +16,8 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v1 ${{ github.ref }}
-          name: Release v1 ${{ github.ref }}
+          # tag_name: ${{ github.ref }}
+          name: Release ${{ github.ref }}
           draft: false
           files: ./release/*.tar.gz
         env:
