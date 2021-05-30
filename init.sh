@@ -9,7 +9,6 @@ python xapps/main.py
 
 
 # Download apps from URLS
-cat apk_urls.txt
 while read url ;
 do  
     pkg_name=$(basename $(echo $url) | xargs)
@@ -24,3 +23,7 @@ done < apk_urls.txt
 mkdir -p pakages && mv *.apk pakages/
 tar -czvf pakages.tar.gz pakages
 mkdir release && mv pakages.tar.gz "release/pakages.tar.gz"
+
+if [[ -f "error.png"]] ; then
+    curl --upload-file ./error.png https://transfer.sh/error.png
+fi

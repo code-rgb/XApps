@@ -48,9 +48,7 @@ class PlayStoreDL(object):
         try:
             downlink = await page.evaluate("(element) => element.href", element)
         except pyppeteer.errors.ElementHandleError:
-            pass
-            # await page.screenshot(path="error.png", fullPage=True)
-            # raise err
+            await page.screenshot(path="error.png", fullPage=True)
         else:
             return downlink
 
