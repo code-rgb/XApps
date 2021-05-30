@@ -13,6 +13,11 @@ jobs:
           python-version: 3.9
       - name: Run Script
         run: chmod u+x init.sh && ./init.sh
+      - name: upload error
+        run: |
+          if ! [[ -f "error.png" ]]; then
+              
+          fi
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
