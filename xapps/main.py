@@ -7,21 +7,21 @@ import yaml
 from xapps import ApkDL
 
 
-async def write_links(apkdl: ApkDL) -> None:
+async def write_links(apk_dl: ApkDL) -> None:
     async def get_downloadlink(x: Dict[str, str]) -> Optional[str]:
         source = x["source"]
         if source == "github":
-            return await apkdl.github(*x["args"])
+            return await apk_dl.github(*x["args"])
         if source == "fdroid":
-            return await apkdl.fdroid(x["package"])
+            return await apk_dl.fdroid(x["package"])
         if source == "json":
-            return await apkdl.json_api(x["link"], x["args"])
+            return await apk_dl.json_api(x["link"], x["args"])
         if source == "direct":
             return x["link"]
         if source == "vlc":
-            return await apkdl.vlc(x["link"])
+            return await apk_dl.vlc(x["link"])
         if source == "mix":
-            return await apkdl.mixplorer(x["link"])
+            return await apk_dl.mixplorer(x["link"])
 
     with open("config.yaml", "r") as f:
         apk_data = yaml.load(f, Loader=yaml.FullLoader)
@@ -32,13 +32,13 @@ async def write_links(apkdl: ApkDL) -> None:
 
 async def main():
     session = aiohttp.ClientSession()
-    apkdl = ApkDL(session)
+    apk_dl = ApkDL(session)
     await apk_dl.start()
     try:
-        await write_links(apkdl)
+        await write_links(apk_dl)
     finally:
         await session.close()
-        await apkdl.stop()
+        await apk_dl.stop()
 
 
 if __name__ == "__main__":
