@@ -22,6 +22,8 @@ async def write_links(apk_dl: ApkDL) -> None:
             return await apk_dl.vlc(x["link"])
         if source == "mix":
             return await apk_dl.mixplorer(x["link"])
+        if source == "playstore":
+            return await apk_dl.playstore(x["package"])
 
     with open("config.yaml", "r") as f:
         apk_data = yaml.load(f, Loader=yaml.FullLoader)
