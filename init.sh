@@ -16,7 +16,7 @@ while read url;
 do  
     # Strip whitespaces
     pkg_name=$(basename $(echo $url) | xargs)
-    # slice pakage name if it's longer than 25 char.
+    # slice pakage name if it's longer than 40 char.
     if [[ "${#pkg_name}" -gt "40" ]] ; then
         pkg_name="${pkg_name:(-40)}"
     fi
