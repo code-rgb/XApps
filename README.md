@@ -19,7 +19,7 @@ Uses github action to fetch and download latest apk from `config.yaml` and then 
 
 Extract tarball to folder `pakages`
 
-```
+```bash
 tar -xvf pakages.tar.gz && rm pakages.tar.gz
 ```
 
