@@ -5,7 +5,7 @@ import json
 import re
 from typing import Dict, List, Optional, Pattern
 from urllib.parse import urlencode
-
+import sys
 import aiohttp
 import pyppeteer
 from bs4 import BeautifulSoup
@@ -83,7 +83,10 @@ class PlayStoreDL(object):
         print("Failed to fetch", package_name, "\nskipping ...")
 
     async def start(self) -> None:
-        self.browser = await pyppeteer.launch(headless=True)
+        try:
+            self.browser = await pyppeteer.launch(headless=True, args=['--no-sandbox'])
+        except BaseException:
+            sys.exit("cannot start the browser")
 
     async def stop(self) -> None:
         await self.browser.close()
