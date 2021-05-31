@@ -34,12 +34,11 @@ async def write_links(apk_dl: ApkDL) -> None:
         outfile.write("\n".join(list(filter(None, urls))))
 
 
-async def main():
-    session = aiohttp.ClientSession()
-    apk_dl = ApkDL(session)
-    await apk_dl.start()
+async def main() -> None:
     try:
-        await write_links(apk_dl)
+        async with aiohttp.ClientSession() as session:
+            apk_dl = ApkDL(session)
+            await apk_dl.start()
+            await write_links(apk_dl)
     finally:
-        await session.close()
         await apk_dl.stop()
