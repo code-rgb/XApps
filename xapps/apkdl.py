@@ -31,11 +31,11 @@ class PlayStoreDL(object):
         }
         self.ua = UserAgent()
         self.retry_after = 5
-        self.max_tries = 4
+        self.max_tries = 15
 
     def __get_url(self, pkg: str) -> str:
         #  | -> merge operator (python 3.9 +)
-        return f"https://apkcombo.com/en-in/apk-downloader?{urlencode({'package': pkg} | self.parameters)}"
+        return f"https://apkcombo.com/en-in/apk-downloader?{urlencode({'package': pkg.strip()} | self.parameters)}"
 
     async def _playstore_fetch(self, package_name: str) -> Optional[str]:
         page = await self.browser.newPage()
@@ -70,8 +70,10 @@ class PlayStoreDL(object):
                 break
             try:
                 dl_link = await self._playstore_fetch(package_name)
-            except pyppeteer.errors.PageError:
-                pass
+            except Exception as all_e:
+                print(all_e.__class__.__name__, str(all_e))
+            # except pyppeteer.errors.PageError:
+            #     pass
             else:
                 # To avoid infinite loop
                 break
