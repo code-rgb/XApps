@@ -7,10 +7,12 @@ pip install -U pip wheel setuptools
 pip install --use-feature=in-tree-build .
 
 # Run Python Script
+echo -e "  Running python script\n\n"
 python -m xapps
+echo -e "\n\n  SUCCESS"
 
 # Download apps from URLS
-while ((i++)); read url
+while read url;
 do  
     # Strip whitespaces
     pkg_name=$(basename $(echo $url) | xargs)
@@ -22,7 +24,7 @@ do
     if ! [[ $pkg_name == *.apk ]] ; then
         pkg_name="$pkg_name$RANDOM.apk"
     fi
-    echo "   $i) $pkg_name"
+    echo $pkg_name
     curl -sL -o "$pkg_name" "$url"
 done < apk_urls.txt
 

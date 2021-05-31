@@ -31,7 +31,7 @@ class PlayStoreDL(object):
         }
         self.ua = UserAgent()
         self.retry_after = 5
-        self.max_tries = 10
+        self.max_tries = 4
 
     def __get_url(self, pkg: str) -> str:
         #  | -> merge operator (python 3.9 +)
@@ -40,11 +40,19 @@ class PlayStoreDL(object):
     async def _playstore_fetch(self, package_name: str) -> Optional[str]:
         page = await self.browser.newPage()
         await page.setUserAgent(self.ua.random)
-        await page.goto(self.__get_url(package_name))
+        await page.goto(
+            self.__get_url(package_name),
+        )
         element = None
+        try_count = 0
         while not element:
+            if try_count >= self.max_tries:
+                await page.screenshot(path="error.png", fullPage=True)
+                return
+            try_count += 1
             await asyncio.sleep(self.retry_after)
             element = await page.querySelector("ul.file-list a.variant")
+            print(f"Waiting for {try_count * self.retry_after} s for page to load")
         try:
             downlink = await page.evaluate("(element) => element.href", element)
         except pyppeteer.errors.ElementHandleError:
@@ -53,16 +61,24 @@ class PlayStoreDL(object):
             return downlink
 
     async def playstore(self, package_name: str) -> Optional[str]:
-        error_count = 0
+        try_count = 0
         dl_link = None
         while not dl_link:
-            if error_count >= self.max_tries:
+            try_count += 1
+            print("Trying to connect to server:", try_count)
+            if try_count >= self.max_tries:
                 break
             try:
                 dl_link = await self._playstore_fetch(package_name)
             except pyppeteer.errors.PageError:
-                error_count += 1
-        return dl_link
+                pass
+            else:
+                # To avoid infinite loop
+                break
+
+        if dl_link:
+            return dl_link
+        print("Failed to fetch", package_name, "\nskipping ...")
 
     async def start(self) -> None:
         self.browser = await pyppeteer.launch(headless=True)

@@ -27,7 +27,12 @@ async def write_links(apk_dl: ApkDL) -> None:
 
     with open("config.yaml", "r") as f:
         apk_data = yaml.load(f, Loader=yaml.FullLoader)
-    urls = await asyncio.gather(*list(map(get_downloadlink, apk_data)))
+    urls = []
+    for i in apk_data:
+        print("Fetching", i.get("app"))
+        urls.append(await get_downloadlink(i))
+        
+    # urls = await asyncio.gather(*list(map(get_downloadlink, apk_data)))
     with open("apk_urls.txt", "w") as outfile:
         outfile.write("\n".join(list(filter(None, urls))))
 

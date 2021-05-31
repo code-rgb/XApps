@@ -100,16 +100,6 @@
   package: com.google.android.inputmethod.latin
   source: playstore
 
-- app: Adobe Scan
-  info: PDF Scanner with OCR, PDF Creator
-  package: com.adobe.scan.android
-  source: playstore
-
-- app: Paytm - UPI
-  info: Money Transfer, Recharge, Bill Payment
-  package: net.one97.paytm
-  source: playstore
-
 - app: Microsoft Office
   info: Word, Excel, PowerPoint & More
   package: com.microsoft.office.officehubrow
