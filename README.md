@@ -27,9 +27,18 @@ tar -xvf pakages.tar.gz && rm pakages.tar.gz
 
 **Note:** Use Latest [Termux from F-Droid](https://f-droid.org/en/packages/com.termux/)
 
+- Root
 ```bash
 for app in pakages/*.apk; do
   pm install $app
+done
+```
+
+- Non-root
+```bash
+for app in pakages/*.apk; do
+  termux-open install $app
+  sleep(8)
 done
 ```
 
@@ -40,13 +49,16 @@ Go to ADB folder, connect your phone and run the below commands in the terminal
 > Powershell
 
 ```powershell
-for %f in (pakages\*.apk) do adb install "%f"
+Get-ChildItem "pakages/" -Filter *.apk | 
+Foreach-Object {
+    adb install -r $_.FullName
+}
 ```
 
 > Bash
 
 ```bash
 for app in pakages/*.apk; do
-  adb install $app
+  adb install -r $app
 done
 ```
