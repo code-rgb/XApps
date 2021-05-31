@@ -7,9 +7,9 @@ pip install -U pip wheel setuptools
 pip install --use-feature=in-tree-build .
 
 # Run Python Script
-echo -e "  Running python script\n\n"
+echo -e "Running python script\n"
 python -m xapps
-echo -e "\n\n  SUCCESS"
+echo "SUCCESS"
 
 # Download apps from URLS
 while read url;
@@ -17,8 +17,8 @@ do
     # Strip whitespaces
     pkg_name=$(basename $(echo $url) | xargs)
     # slice pakage name if it's longer than 25 char.
-    if [[ "${#pkg_name}" -gt "25" ]] ; then
-        pkg_name="${pkg_name:(-25)}"
+    if [[ "${#pkg_name}" -gt "40" ]] ; then
+        pkg_name="${pkg_name:(-40)}"
     fi
     # check if it ends with ".apk"
     if ! [[ $pkg_name == *.apk ]] ; then

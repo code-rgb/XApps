@@ -9,6 +9,7 @@ from xapps import ApkDL
 
 async def write_links(apk_dl: ApkDL) -> None:
     async def get_downloadlink(x: Dict[str, str]) -> Optional[str]:
+        print("Fetching", x["app"])
         source = x["source"]
         if source == "github":
             return await apk_dl.github(*x["args"])
@@ -27,12 +28,7 @@ async def write_links(apk_dl: ApkDL) -> None:
 
     with open("config.yaml", "r") as f:
         apk_data = yaml.load(f, Loader=yaml.FullLoader)
-    urls = []
-    for i in apk_data:
-        print("Fetching", i.get("app"))
-        urls.append(await get_downloadlink(i))
-        
-    # urls = await asyncio.gather(*list(map(get_downloadlink, apk_data)))
+    urls = await asyncio.gather(*list(map(get_downloadlink, apk_data)))
     with open("apk_urls.txt", "w") as outfile:
         outfile.write("\n".join(list(filter(None, urls))))
 
