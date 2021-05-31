@@ -1,0 +1,106 @@
+# - app: Application name (Optional)
+#   info: Application description (Optional)
+#   source: (github | json | direct | fdroid | playstore)
+#     or wildcard like (mix | vlc)
+#   args: (if required)
+#   package: Pakage name, can be found by app's playstore link (if required)
+#   link: URL e.g direct download link (if required)
+
+- app: NekoX
+  info:
+    a free and open source third-party Telegram client, based on Telegram-FOSS
+    with features added.
+  source: github
+  args:
+    - NekoX-Dev/NekoX
+    - NekoX-mini-arm64-v8a-releaseNoGcm.apk
+
+- app: Instander
+  info: Instagram Mod
+  source: json
+  link: https://raw.githubusercontent.com/the-dise/the-dise.github.io/master/instander/ota.json
+  args:
+    - link
+
+- app: Spotify
+  info: Adfree Spotify Mod
+  source: direct
+  link: http://transfer.sh/get/9rcvP/Spotify-v8.6.26.897Mod-Amoled-arm64-v8a.apk
+
+- app: Infinity for Reddit
+  info: A beautiful, feature-rich Reddit client.
+  package: ml.docilealligator.infinityforreddit
+  source: fdroid
+
+- app: Aurora Droid
+  info: An alternative to the default F-Droid app
+  package: com.aurora.adroid
+  source: fdroid
+
+- app: Aurora Store
+  info: A Google Playstore Client
+  package: com.aurora.store
+  source: fdroid
+
+- app: AdAway
+  info: A free and Open Source ad blocker for Android.
+  package: org.adaway
+  source: fdroid
+
+- app: Vanced Manager
+  info: Install Youtube Vanced, Vanced Music and Micro G
+  source: github
+  args:
+    - YTVanced/VancedManager
+    - manager.apk
+
+- app: MiXplorer
+  info: a fast, smooth, beautiful, reliable and full-featured Android file
+    manager
+  source: mix
+  link: https://forum.xda-developers.com/showpost.php?p=23109280&postcount=2
+
+- app: Whatsapp
+  info: Spyware, get Zucked :p
+  package: com.whatsapp
+  source: playstore
+
+- app: VLC
+  info: The best video and music player. Fast and "just works", plays any file
+  source: vlc
+  link: https://www.videolan.org/vlc/download-android.html
+
+- app: Gmail
+  info: Mail app from Google
+  package: com.google.android.gm
+  source: playstore
+
+- app: Google Keep - notes and lists
+  info: Notes app from Google
+  package: com.google.android.keep
+  source: playstore
+
+- app: Google Maps
+  info: Maps app from Google
+  package: com.google.android.apps.maps
+  source: playstore
+
+- app: Google Calendar
+  info: Calendar app from Google
+  package: com.google.android.calendar
+  source: playstore
+
+- app: Adobe Scan
+  info: PDF Scanner with OCR, PDF Creator
+  package: com.adobe.scan.android
+  source: playstore
+
+- app: Gboard
+  info: the Google Keyboard
+  package: com.google.android.inputmethod.latin
+  source: playstore
+
+- app: Microsoft Office
+  info: Word, Excel, PowerPoint & More
+  package: com.microsoft.office.officehubrow
+  source: playstore
