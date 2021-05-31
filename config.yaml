@@ -104,3 +104,8 @@
   info: Word, Excel, PowerPoint & More
   package: com.microsoft.office.officehubrow
   source: playstore
+  
+- app: Google Photos
+  info: Gallery app from Google
+  package: com.google.android.apps.photos
+  source: playstore
