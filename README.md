@@ -37,7 +37,7 @@ done
 - Non-root
 ```bash
 for app in pakages/*.apk; do
-  termux-open install $app
+  termux-open $app
   sleep(8)
 done
 ```
