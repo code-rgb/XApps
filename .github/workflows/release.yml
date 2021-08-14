@@ -21,7 +21,7 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: "v0.1.0"
+          tag_name: "v0.1.1"
           name: Release ${{ github.ref }}
           draft: false
           files: ./release/*.tar.gz
