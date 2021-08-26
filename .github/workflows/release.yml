@@ -1,11 +1,22 @@
 name: Release
 
-on: workflow_dispatch
+on:
+    push:
+        tags:
+            - "v*.*.*"
 
 jobs:
-  run_and_release:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run Script
-        run: chmod +x init.sh && ./init.sh
+    run_and_release:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Run Script
+              run: chmod +x init.sh && ./init.sh
+            - name: Mediainfo Static Binary
+              if: startsWith(github.ref, 'refs/tags/')
+              uses: softprops/action-gh-release@v1
+              with:
+                  draft: false
+                  files: ./release/*
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
