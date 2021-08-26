@@ -1,34 +1,34 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 # Fail fast
 set -euo pipefail
 
-# Install Requirements
-pip install -U pip wheel setuptools
-pip install --use-feature=in-tree-build .
+WORK_DIR=$PWD
 
-# Run Python Script
-echo -e "Running python script\n"
-python -m xapps
-echo "SUCCESS"
 
-# Download apps from URLS
-while read url;
-do  
-    # Strip whitespaces
-    pkg_name=$(basename $(echo $url) | xargs)
-    # slice pakage name if it's longer than 40 char.
-    if [[ "${#pkg_name}" -gt "40" ]] ; then
-        pkg_name="${pkg_name:(-40)}"
-    fi
-    # check if it ends with ".apk"
-    if ! [[ $pkg_name == *.apk ]] ; then
-        pkg_name="$pkg_name$RANDOM.apk"
-    fi
-    echo $pkg_name
-    curl -sL -o "$pkg_name" "$url"
-done < apk_urls.txt
+latest_release() {
+    curl -s "https://api.github.com/repos/$1/releases/latest" |
+    grep '"tag_name":' |
+    sed -E 's/.*"v([^"]+)".*/\1/'
+}
 
-# Compress Output
-mkdir -p pakages && mv *.apk pakages/
-tar -czvf pakages.tar.gz pakages
-mkdir release && mv pakages.tar.gz "release/pakages.tar.gz"
+
+get_source() {
+    echo "https://mediaarea.net/download/binary/mediainfo/$1/MediaInfo_CLI_$1_GNU_FromSource.tar.gz"
+}
+
+
+latest=$(latest_release "MediaArea/MediaInfo")
+echo '
+    _________________________________________
+    |                                        |
+    |    Building Binary for Mediainfo ...   |
+    |________________________________________|
+'
+echo  "     Version :  v$latest"
+echo  "     OS      :  Linux"
+mkdir -p build && cd build
+curl -s $(get_source $latest) | tar -xz
+source_dir="MediaInfo_CLI_GNU_FromSource"
+[ -d $source_dir ] && cd source_dir || exit 1
+chmod +x CLI_Compile.sh && ./CLI_Compile.sh
