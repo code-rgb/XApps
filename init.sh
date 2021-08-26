@@ -3,7 +3,8 @@
 # Fail fast
 set -euo pipefail
 
-Binary="MediaInfo_CLI_GNU_FromSource/MediaInfo/Project/GNU/CLI/mediainfo"
+WORK_DIR=$PWD
+Binary="build/MediaInfo_CLI_GNU_FromSource/MediaInfo/Project/GNU/CLI/mediainfo"
 
 
 latest_release() {
@@ -30,9 +31,10 @@ echo  "     OS      :  Linux"
 mkdir -p build && cd build
 curl -s $(get_source $latest) | tar -xz
 source_dir="MediaInfo_CLI_GNU_FromSource"
-[ -d $source_dir ] || exit 1
-chmod +x "$source_dir/CLI_Compile.sh" && "./$source_dir/CLI_Compile.sh"
-mv $Binary $PWD
+[ -d $source_dir ] && cd $source_dir || exit 1
+chmod +x CLI_Compile.sh && ./CLI_Compile.sh
+cd $WORK_DIR && cp $Binary .
 tar -czvf "Mediainfo_$latest.tar.gz" mediainfo
 mkdir -p release && mv *.tar.gz release/
 echo "DONE"
+rm -rf build/
